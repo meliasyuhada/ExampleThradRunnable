@@ -10,20 +10,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         button.setOnClickListener {
-            val runnable = Worker()
-            val thread = Thread(runnable)
-            thread.start()
+        // ini ThreadRunnable
+//            val runnable = Worker()
+//            val thread = Thread(runnable)
+//            thread.start()
+
+            Thread(Runnable { killSomeTime() }).start()
         }
     }
-    inner class Worker : Runnable {
-        override fun run() {
-            killSomeTime()
-        }
-    }
+    // ini ThreadRunnable
+//    inner class Worker : Runnable {
+//        override fun run() {
+//            killSomeTime()
+//        }
+//    }
     private  fun killSomeTime() {
-        for (i in 1..10) {
+        // ini ThreadRunnable
+//        for (i in 1..10) {
+//            Thread.sleep(2000)
+//            println("i: $i")
+//        }
+        for (i in 1..20) {
+            runOnUiThread(Runnable { textview.text = i.toString() })
+            println("i:$i")
             Thread.sleep(2000)
-            println("i: $i")
         }
     }
 }
